@@ -1,0 +1,18 @@
+services:
+  bazarr:
+    image: ghcr.io/podmania/bazarr:latest
+    # set to host user id and gid
+    # defaults to 1000:1000
+    # user: 1001:1001
+    container_name: bazarr
+    ports:
+      - 8989:8989
+    volumes:   
+      - ./config:/config
+      # root folder to your media
+      - ./data:/data
+      - /etc/localtime:/etc/localtime:ro # optional: use either TZ variable or localtime mapping, not both
+    # environment:
+    #   - TZ=America/New_York
+    restart: unless-stopped
+
