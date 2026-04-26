@@ -14,17 +14,18 @@ let
     ffmpeg
     unar
   ];
-  truststorePatch = ./truststore-injection.patch;
 in
 stdenv.mkDerivation rec {
   pname = "bazarr";
   version = "1.5.6";
 
   src = fetchzip {
-    url = "https://github.com/morpheus65535/bazarr/releases/download/v${version}/bazarr.zip";
+    url = "https://github.com/bryce-hoehn/bazarr/releases/download/v${version}/bazarr.zip";
     hash = "sha256-S3idNH9Wm9f6aNj69dERmeks1rLvUeQJYFebXa5cWQo=";
     stripRoot = false;
   };
+
+  nativeBuildInputs = [ makeWrapper ];
 
   buildInputs = [
     (python3.withPackages (ps: [
@@ -40,10 +41,6 @@ stdenv.mkDerivation rec {
   ]
   ++ runtimeProgDeps;
 
-  nativeBuildInputs = [ makeWrapper ];
-
-  patches = [ truststorePatch ];
-  
   installPhase = ''
     runHook preInstall
 
