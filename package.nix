@@ -54,10 +54,10 @@ stdenv.mkDerivation rec {
 
     # Create sitecustomize.py file to install truststore
     # Fix for InsecureRequestWarning errors
-    cat > "$out/custom-site/sitecustomize.py" <<EOF
-      import truststore
-      truststore.inject_into_ssl()
-    EOF
+    cat > "$out/custom-site/sitecustomize.py" <<"EOF"
+import truststore
+truststore.inject_into_ssl()
+EOF
 
     makeWrapper "$out/share/${pname}/bazarr.py" "$out/bin/bazarr" \
       --suffix PATH : "${lib.makeBinPath runtimeProgDeps}" \
