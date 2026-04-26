@@ -21,7 +21,7 @@ stdenv.mkDerivation rec {
 
   src = fetchzip {
     url = "https://github.com/bryce-hoehn/bazarr/releases/download/v${version}/bazarr.zip";
-    hash = "sha256-S3idNH9Wm9f6aNj69dERmeks1rLvUeQJYFebXa5cWQo=";
+    hash = "sha256-f72c4c494469da5cdd86b0858c1ef62cbb48062789b6edb9ea7590107cc20e9a";
     stripRoot = false;
   };
 
