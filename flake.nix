@@ -32,6 +32,7 @@
           # Distroless non‑root user
           User = "1000";
           WorkingDir = "/config";
+          Env = [ "SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt" ];
         };
       };
     };
