@@ -17,7 +17,7 @@ let
 in
 stdenv.mkDerivation rec {
   pname = "bazarr";
-  version = "1.5.6";
+  version = "1.5.7";
 
   src = fetchzip {
     url = "https://github.com/bryce-hoehn/bazarr/releases/download/v${version}/bazarr.zip";
