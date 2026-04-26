@@ -44,7 +44,7 @@ stdenv.mkDerivation rec {
   installPhase = ''
     runHook preInstall
 
-    mkdir -p "$out"/{bin,share/${pname}}
+    mkdir -p "$out"/{bin,share/${pname},custom-site}
     cp -r * "$out/share/${pname}"
 
     # Add missing shebang and execute perms so that patchShebangs can do its
@@ -54,9 +54,7 @@ stdenv.mkDerivation rec {
 
     # Create sitecustomize.py file to install truststore
     # Fix for InsecureRequestWarning errors
-    site_packages="$(${python3.interpreter} -c "import site; print(site.getsitepackages()[0])")"
-    mkdir -p "$site_packages"
-    cat > "$site_packages/sitecustomize.py" <<EOF
+    cat > "$out/custom-site/sitecustomize.py" <<EOF
       import truststore
       truststore.inject_into_ssl()
     EOF
@@ -64,6 +62,7 @@ stdenv.mkDerivation rec {
     makeWrapper "$out/share/${pname}/bazarr.py" \
         "$out/bin/bazarr" \
         --suffix PATH : ${lib.makeBinPath runtimeProgDeps}
+        --set PYTHONPATH "$out/custom-site"
 
     runHook postInstall
   '';
