@@ -27,7 +27,7 @@
             "/data" = {};
           };
           # Tell Bazarr to use /config as its data directory
-          Cmd = [ "${pkgs.bazarr}/bin/Bazarr" "--config" "/config" "--no-update" "True" ];
+          Cmd = [ "${pkgs.bazarr}/bin/bazarr" "--config" "/config" "--no-update" "True" ];
           # Distroless non‑root user
           User = "1000";
           WorkingDir = "/config";
