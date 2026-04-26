@@ -59,10 +59,9 @@ stdenv.mkDerivation rec {
       truststore.inject_into_ssl()
     EOF
 
-    makeWrapper "$out/share/${pname}/bazarr.py" \
-        "$out/bin/bazarr" \
-        --suffix PATH : ${lib.makeBinPath runtimeProgDeps}
-        --set PYTHONPATH "$out/custom-site"
+    makeWrapper "$out/share/${pname}/bazarr.py" "$out/bin/bazarr" \
+      --suffix PATH : "${lib.makeBinPath runtimeProgDeps}" \
+      --set PYTHONPATH "$out/custom-site"
 
     runHook postInstall
   '';
