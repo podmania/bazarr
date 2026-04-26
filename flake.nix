@@ -15,7 +15,7 @@
         tag = "latest";
         contents = [ 
           pkgs.bazarr
-          pkgs.cacert
+          pkgs.dockerTools.caCertificates
           pkgs.tzdata
         ];
         config = {
@@ -26,10 +26,6 @@
             "/config" = {};
             "/data" = {};
           };
-
-          Env = [
-            "SSL_CERT_FILE=${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt"
-          ];
 
           # Tell Bazarr to use /config as its data directory
           Cmd = [ "${pkgs.bazarr}/bin/bazarr" "--config" "/config" "--no-update" "True" ];
