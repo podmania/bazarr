@@ -8,9 +8,8 @@
   outputs = { self, nixpkgs }: let
     system = builtins.currentSystem;
     pkgs = nixpkgs.legacyPackages.${system};
-  in {
     bazarrFixed = pkgs.callPackage ./package.nix { };
-
+  in {
     packages.${system} = {
       bazarr-image = pkgs.dockerTools.buildLayeredImage {
         name = "bazarr";
